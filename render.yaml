@@ -3,9 +3,8 @@ services:
   - type: web
     name: vikhub-backend
     env: docker
-    dockerContext: backend
+    dockerContext: .
     dockerfilePath: backend/Dockerfile
-    envVars:
       - key: DEBUG
         value: "False"
       - key: DATABASE_URL
@@ -27,7 +26,7 @@ services:
   - type: web
     name: vikhub-frontend
     env: docker
-    dockerContext: frontend
+    dockerContext: .
     dockerfilePath: frontend/Dockerfile
     envVars:
       - key: NEXT_PUBLIC_API_URL
