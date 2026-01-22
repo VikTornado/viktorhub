@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog",
+    "notes": "Notes",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Welcome to ViktorHub",
+    "subtitle": "Software Engineer & Content Creator",
+    "cta": "View My Work"
+  },
+  "projects": {
+    "title": "My Projects",
+    "view_details": "View Details",
+    "all": "All Projects",
+    "back": "Back to Projects"
+  },
+  "blog": {
+    "title": "Latest Blog Posts",
+    "read_more": "Read More",
+    "back": "Back to Blog",
+    "search": "Search posts...",
+    "tags": "Filter by tags"
+  },
+  "notes": {
+    "title": "Quick Notes & Tips"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "success": "Message sent successfully!",
+    "error": "Failed to send message."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}

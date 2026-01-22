@@ -1,0 +1,11 @@
+django
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+psycopg2-binary
+python-dotenv
+django-prose-editor
+dj-database-url
+django-filter
+Pillow
+nh3
