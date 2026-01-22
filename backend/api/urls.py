@@ -4,6 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from . import views
 from .views import (
     TagViewSet, ProjectViewSet, BlogPostViewSet, 
     NoteViewSet, ContactMessageViewSet
@@ -20,4 +21,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('user-status/', views.UserStatusView.as_view(), name='user_status'),
 ]

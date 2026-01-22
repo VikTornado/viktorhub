@@ -1,4 +1,6 @@
-from rest_framework import viewsets, permissions, filters
+from rest_framework import viewsets, permissions, filters, views
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
 from content.models import Tag, Project, BlogPost, Note, ContactMessage
 from .serializers import (
@@ -53,3 +55,11 @@ class ContactMessageViewSet(viewsets.ModelViewSet):
         if self.action in ['list', 'retrieve', 'delete', 'update', 'partial_update']:
             return [permissions.IsAuthenticated()]
         return super().get_permissions()
+
+class UserStatusView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request):
+        return Response({
+            'is_authenticated': request.user.is_authenticated,
+            'is_staff': request.user.is_staff
+        })
