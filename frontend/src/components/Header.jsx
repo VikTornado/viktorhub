@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
+import { useAuth } from '@/context/AuthContext';
 import { siteConfig } from '@/lib/config';
+import { Menu, X, Globe, User, LayoutDashboard } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
   { name: 'home', href: '/' },
@@ -21,6 +22,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { lang, t, toggleLang } = useLanguage();
+  const { isAdmin } = useAuth();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -63,6 +65,24 @@ export default function Header() {
             <Globe className="w-4 h-4" />
             <span className="uppercase text-sm font-medium">{lang}</span>
           </button>
+
+          {isAdmin ? (
+            <a 
+              href="http://localhost:8000/admin/" 
+              className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
+              title="Admin Panel"
+            >
+              <LayoutDashboard className="w-5 h-5" />
+            </a>
+          ) : (
+            <a 
+              href="http://localhost:8000/admin/login/" 
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+              title="Log In"
+            >
+              <User className="w-5 h-5" />
+            </a>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -113,6 +133,28 @@ export default function Header() {
                   <Globe className="w-5 h-5" />
                   <span className="uppercase font-medium">Switch to {lang === 'en' ? 'UKR' : 'EN'}</span>
                 </button>
+
+                <div className="pt-4 border-t">
+                  {isAdmin ? (
+                    <a 
+                      href="http://localhost:8000/admin/" 
+                      className="flex items-center gap-3 text-blue-600 font-bold"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <LayoutDashboard className="w-6 h-6" />
+                      <span>Admin Panel</span>
+                    </a>
+                  ) : (
+                    <a 
+                      href="http://localhost:8000/admin/login/" 
+                      className="flex items-center gap-3 font-bold"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <User className="w-6 h-6" />
+                      <span>Log In</span>
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           </>
