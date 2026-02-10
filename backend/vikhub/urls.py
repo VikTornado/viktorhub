@@ -18,12 +18,42 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.contrib.auth import views as auth_views
+
+def api_root(request):
+    """API Root - показує доступні endpoints"""
+    return JsonResponse({
+        'message': 'Welcome to ViktorHub API',
+        'version': '1.0',
+        'endpoints': {
+            'projects': '/api/projects/',
+            'blog_posts': '/api/posts/',
+            'notes': '/api/notes/',
+            'tags': '/api/tags/',
+            'contact': '/api/contact/',
+            'admin': '/admin/',
+            'api_docs': '/api/',
+        },
+        'authentication': {
+            'token': '/api/token/',
+            'refresh': '/api/token/refresh/',
+        },
+        'frontend': 'http://localhost:3000'
+    })
+
+def custom_logout(request):
+    """Custom logout що редиректить на фронтенд"""
+    from django.contrib.auth import logout
+    logout(request)
+    return redirect('http://localhost:3000')
 
 urlpatterns = [
-    path('', lambda request: redirect('admin/', permanent=False)),
+    path('', api_root, name='api-root'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('accounts/logout/', custom_logout, name='logout'),
 ]
 
 if settings.DEBUG:

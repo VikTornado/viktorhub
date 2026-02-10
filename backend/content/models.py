@@ -26,6 +26,7 @@ class Project(models.Model):
     repo_url = models.URLField(blank=True, null=True)
     live_url = models.URLField(blank=True, null=True)
     cover_image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    gallery_images = models.JSONField(default=list, blank=True, help_text="List of image URLs for project gallery")
     tags = models.ManyToManyField(Tag, related_name='projects')
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
